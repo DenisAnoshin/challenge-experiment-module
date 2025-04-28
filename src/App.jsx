@@ -9,8 +9,13 @@ import Campaigns from "./Pages/Campaigns";
 import HowItWorks from "./Pages/HowItWorks";
 import MyCampaigns from "./Pages/MyCampaigns";
 import ScrollToTop from "./Components/ScrollToTop";
+import Modal from "./Components/Modal";
+import { useContext } from "react";
+import { MainContext } from "./Context/MainContext";
 
 function App() {
+
+  const { modalState, hideModal } = useContext(MainContext);
   return (
     <BrowserRouter>
       <div className="bg-gray-950">
@@ -28,6 +33,16 @@ function App() {
           </Routes>
         </div>
         <Footer />
+
+        <Modal
+          isOpen={modalState.isOpen}
+          onClose={hideModal}
+          title={modalState.title}
+          message={modalState.message}
+          actionText={modalState.actionText}
+          onAction={modalState.onAction}
+        />
+
       </div>
     </BrowserRouter>
   );
